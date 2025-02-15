@@ -1,5 +1,3 @@
-package ProdutorConsumidor
-
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 
@@ -12,9 +10,6 @@ class Producer(private val qtProduzir : Int) {
         for (i in 1..qtProduzir) {
 
             channel.send(i)
-            //while(true)
-            //if(channel.isFull) -> suspended || await()
-            //else -> channel.send(item)
 
             println("Produzindo... -> $i")
             delay(50)
@@ -44,6 +39,6 @@ fun main() = runBlocking {
     val producerJob = launch { producer.produceItems() }
     val consumerJob = launch { consumer.consumeItems() }
 
-    producerJob.join() //Espera até que a coroutine esteja finalizada
+    producerJob.join()
     consumerJob.join()
 }
